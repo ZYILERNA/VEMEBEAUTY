@@ -24,11 +24,12 @@ export default function HeroSection() {
     let lastSeekTime = -1;
 
     const fastSeek = (t: number) => {
-      const v = video as HTMLVideoElement & { fastSeek?: (t: number) => void };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const v = video as any;
       if (typeof v.fastSeek === "function") {
         v.fastSeek(t);
       } else {
-        v.currentTime = t;
+        video.currentTime = t;
       }
     };
 
