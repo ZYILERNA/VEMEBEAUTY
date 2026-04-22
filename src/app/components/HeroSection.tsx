@@ -24,10 +24,11 @@ export default function HeroSection() {
     let lastSeekTime = -1;
 
     const fastSeek = (t: number) => {
-      if ("fastSeek" in video) {
-        (video as HTMLVideoElement & { fastSeek(t: number): void }).fastSeek(t);
+      const v = video as HTMLVideoElement & { fastSeek?: (t: number) => void };
+      if (typeof v.fastSeek === "function") {
+        v.fastSeek(t);
       } else {
-        video.currentTime = t;
+        v.currentTime = t;
       }
     };
 
