@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VEME Beauty · Centro de Estética en Barcelona",
   description: "Centro de estética y medicina estética en Barcelona. Tratamientos faciales, corporales, capilares y medicina estética avanzada.",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
