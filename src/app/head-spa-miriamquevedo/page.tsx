@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Head Spa Miriamquevedo · VEME Beauty" };
+export const metadata = treatmentMetadata("head-spa-miriamquevedo");
 
 export default function HeadSpaMiriamquevedo() {
   return (
     <TreatmentPage
+      slug="head-spa-miriamquevedo"
       category="Estética · Tratamientos Capilares"
       title="Head Spa Miriamquevedo"
       subtitle="La ciencia del cabello más avanzada de España con ingredientes ultra-premium"
@@ -23,8 +25,8 @@ export default function HeadSpaMiriamquevedo() {
         { label: "Marca", value: "Miriamquevedo" },
         { label: "Recuperación", value: "Ninguna" },
       ]}
-      image="/images/miriam-300x300.png"
-      video="/videos/miriamhero.mp4"
+      video="/videos/head-spa-miriamquevedo.mp4"
+      videoPoster="/images/posters/head-spa-miriamquevedo.jpg"
     />
   );
 }

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "EXILIS ULTRA 360 · VEME Beauty" };
+export const metadata = treatmentMetadata("exilis-ultra-360");
 
 export default function ExilisUltra360() {
   return (
     <TreatmentPage
+      slug="exilis-ultra-360"
       category="Medicina Estética · Antienvejecimiento"
       title="EXILIS ULTRA 360"
       subtitle="Sinergia de radiofrecuencia y ultrasonido para rejuvenecer y esculpir"

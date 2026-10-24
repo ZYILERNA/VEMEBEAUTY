@@ -1,14 +1,16 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "INMODE MINI FX · VEME Beauty" };
+export const metadata = treatmentMetadata("inmode-minifx");
 
 export default function InmodeMiniFX() {
   return (
     <TreatmentPage
+      slug="inmode-minifx"
       category="Medicina Estética · Antienvejecimiento · INMODE"
       title="INMODE MINI FX"
       subtitle="Eliminación de grasa localizada con radiofrecuencia subdermal en zonas pequeñas"
-      description="MINI FX de INMODE es un tratamiento minimente invasivo que combina radiofrecuencia subdermal con succión para tratar depósitos de grasa en zonas pequeñas como la papada, la parte interna de las rodillas o los brazos. Actúa directamente sobre el tejido adiposo y estimula la retracción cutánea para un resultado lifting y reafirmante."
+      description="MINI FX de INMODE es un tratamiento mínimamente invasivo que combina radiofrecuencia subdermal con succión para tratar depósitos de grasa en zonas pequeñas como la papada, la parte interna de las rodillas o los brazos. Actúa directamente sobre el tejido adiposo y estimula la retracción cutánea para un resultado lifting y reafirmante."
       benefits={[
         "Reduce la grasa en zonas pequeñas difíciles de tratar",
         "Efecto reafirmante de la piel simultáneo",

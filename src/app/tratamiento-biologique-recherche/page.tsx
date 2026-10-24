@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Tratamiento Biologique Recherche · VEME Beauty" };
+export const metadata = treatmentMetadata("tratamiento-biologique-recherche");
 
 export default function TratamientoBR() {
   return (
     <TreatmentPage
+      slug="tratamiento-biologique-recherche"
       category="Estética · Tratamientos Faciales"
       title="Tratamiento Biologique Recherche"
       subtitle="El protocolo facial más exclusivo del mundo, personalizado al máximo"
@@ -24,7 +26,6 @@ export default function TratamientoBR() {
         { label: "Recuperación", value: "Ninguna" },
         { label: "Indicaciones", value: "Todos los tipos de piel y problemáticas" },
       ]}
-      image="/images/biologiq-300x300.png"
     />
   );
 }

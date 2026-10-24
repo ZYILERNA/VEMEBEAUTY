@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Terapia Regenerativa con Exosomas · VEME Beauty" };
+export const metadata = treatmentMetadata("terapia-regenerativa-con-exosomas");
 
 export default function TerapiaExosomas() {
   return (
     <TreatmentPage
+      slug="terapia-regenerativa-con-exosomas"
       category="Medicina Estética"
       title="Terapia Regenerativa con Exosomas"
       subtitle="La frontera de la medicina regenerativa para rejuvenecer y reparar la piel"

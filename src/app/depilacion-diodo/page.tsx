@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Depilación Diodo · VEME Beauty" };
+export const metadata = treatmentMetadata("depilacion-diodo");
 
 export default function DepilacionDiodo() {
   return (
     <TreatmentPage
+      slug="depilacion-diodo"
       category="Estética · Dispositivos"
       title="Depilación Láser Diodo"
       subtitle="Eliminación permanente del vello con la tecnología láser más segura y eficaz"

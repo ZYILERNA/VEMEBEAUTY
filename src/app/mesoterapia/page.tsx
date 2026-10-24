@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Mesoterapia · VEME Beauty" };
+export const metadata = treatmentMetadata("mesoterapia");
 
 export default function Mesoterapia() {
   return (
     <TreatmentPage
+      slug="mesoterapia"
       category="Medicina Estética"
       title="MESOTERAPIA"
       subtitle="Microinyecciones de activos regeneradores para revitalizar la piel desde dentro"

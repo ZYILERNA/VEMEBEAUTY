@@ -1,133 +1,266 @@
-import Navbar from "./components/Navbar";
+import Image from "next/image";
+import Link from "next/link";
 import HeroSection from "./components/HeroSection";
-import Footer from "./components/Footer";
+import Reveal from "./components/Reveal";
+import TreatmentCard from "./components/TreatmentCard";
+import BrandStrip from "./components/BrandStrip";
+import BookingCTA from "./components/BookingCTA";
+import ReelStrip from "./components/ReelStrip";
+import { FEATURED, HOME_CATEGORIES, TREATMENTS, BRANDS } from "@/lib/treatments";
+import { CATEGORY_IMAGES } from "@/lib/media";
+import { SITE, fullAddress } from "@/lib/site";
+
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
+const PILLARS = [
+  {
+    title: "Diagnóstico personalizado",
+    text: "Analizamos tu piel y tus objetivos antes de cada tratamiento para diseñar un protocolo a tu medida.",
+  },
+  {
+    title: "Tecnología de referencia",
+    text: "Thermage FLX, Morpheus8, Fotona 4D, Ultraformer III, PicoCare o Hydrafacial: las plataformas más avanzadas.",
+  },
+  {
+    title: "Firmas de alta cosmética",
+    text: "Valmont, Biologique Recherche, Natura Bissé, SkinCeuticals, Kérastase y más firmas de prestigio.",
+  },
+  {
+    title: "Equipo médico y estético",
+    text: "Profesionales de la estética y de la medicina estética trabajando juntos para resultados naturales.",
+  },
+];
+
+const REELS = [
+  { src: "/videos/reel-dia.mp4", poster: "/images/posters/reel-dia.jpg", title: "Un día en VEME" },
+  { src: "/videos/reel-presentacion.mp4", poster: "/images/posters/reel-presentacion.jpg", title: "Nuestro centro" },
+  { src: "/videos/reel-luis.mp4", poster: "/images/posters/reel-luis.jpg", title: "Láser con Luis" },
+  { src: "/videos/reel-pico.mp4", poster: "/images/posters/reel-pico.jpg", title: "Pico tatuajes" },
+];
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <HeroSection />
 
-      <main id="content">
-        <HeroSection />
-
-        {/* Services Section */}
-        <section className="py-24 px-4 bg-white">
-          <div className="max-w-6xl mx-auto text-center">
-            <p className="text-xs uppercase tracking-[0.4em] text-[#b89b6e] mb-3">Lo que ofrecemos</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-16" style={{ fontFamily: "Georgia, serif" }}>
-              NUESTROS SERVICIOS
+      {/* Introducción */}
+      <section id="descubre" className="bg-cream py-24 md:py-36">
+        <div className="container-luxe grid items-center gap-16 lg:grid-cols-2">
+          <Reveal>
+            <p className="eyebrow">Bienvenida a VEME Beauty</p>
+            <h2 className="mt-6 font-display text-4xl leading-tight md:text-6xl">
+              Belleza consciente, <em className="text-gold-deep">resultados reales</em>
             </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {/* Facial */}
-              <div className="group flex flex-col items-center p-8 border border-gray-100 hover:border-[#b89b6e] hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-[#f5ede4]">
-                  <svg className="w-8 h-8 text-[#b89b6e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+            <p className="mt-8 text-lg font-light leading-relaxed text-stone">
+              En VEME Beauty unimos la estética avanzada y la medicina estética en un espacio cálido y luminoso junto al
+              Arc de Triomf. Cada tratamiento empieza escuchándote: estudiamos tu piel, tu cabello y tu estilo de vida
+              para recomendarte solo lo que de verdad necesitas.
+            </p>
+            <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-10">
+              {[
+                { n: `${TREATMENTS.length}`, l: "tratamientos" },
+                { n: `${BRANDS.length}`, l: "firmas premium" },
+                { n: SITE.reviews.rating.toLocaleString("es-ES"), l: `valoración en ${SITE.reviews.source}` },
+              ].map((s) => (
+                <div key={s.l}>
+                  <dt className="sr-only">{s.l}</dt>
+                  <dd className="font-display text-4xl text-ink md:text-5xl">{s.n}</dd>
+                  <dd className="mt-2 text-[0.62rem] uppercase leading-snug tracking-[0.12em] text-mist sm:text-xs sm:tracking-[0.18em]">{s.l}</dd>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3" style={{ fontFamily: "Georgia, serif" }}>
-                  Tratamientos Faciales
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Microneedling, peelings enzimáticos, tratamientos con marcas premium como Valmont, DMK y Biologique Recherche.
-                </p>
-              </div>
-
-              {/* Laser */}
-              <div className="group flex flex-col items-center p-8 border border-gray-100 hover:border-[#b89b6e] hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-[#f5ede4]">
-                  <svg className="w-8 h-8 text-[#b89b6e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3" style={{ fontFamily: "Georgia, serif" }}>
-                  Depilación Láser
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Tecnología de diodo de última generación para una depilación permanente segura y efectiva para todo tipo de piel.
-                </p>
-              </div>
-
-              {/* Corporal */}
-              <div className="group flex flex-col items-center p-8 border border-gray-100 hover:border-[#b89b6e] hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-[#f5ede4]">
-                  <svg className="w-8 h-8 text-[#b89b6e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3" style={{ fontFamily: "Georgia, serif" }}>
-                  Cuidado Corporales
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Masajes, criolipólisis, ondas electromagnéticas y tratamientos reductores para moldear y cuidar tu cuerpo.
-                </p>
-              </div>
-            </div>
-
-            {/* Cuidado Estético label */}
-            <div className="mt-16 inline-block border-t border-b border-[#b89b6e] px-12 py-3">
-              <p className="text-[#b89b6e] uppercase tracking-[0.3em] text-sm font-medium">Cuidado Estético</p>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA / Booking strip */}
-        <section className="bg-[#f5ede4] py-16 px-4 text-center">
-          <p className="text-xs uppercase tracking-[0.4em] text-[#b89b6e] mb-3">Tu belleza, nuestra pasión</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6" style={{ fontFamily: "Georgia, serif" }}>
-            ¿Lista para tu próxima cita?
-          </h2>
-          <a
-            href="https://widget.treatwell.es/establecimiento/veme-beauty"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#b89b6e] hover:bg-[#a08558] text-white font-semibold uppercase tracking-widest text-sm px-10 py-4 transition-colors duration-300"
-          >
-            Reserva ahora
-          </a>
-        </section>
-
-        {/* Map / Location */}
-        <section className="py-20 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 text-center md:text-left">
-              <p className="text-xs uppercase tracking-[0.4em] text-[#b89b6e] mb-3">Encuéntranos</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4" style={{ fontFamily: "Georgia, serif" }}>
-                Ubicación
-              </h2>
-              <p className="text-gray-500 mb-2">C/ de Trafalgar, 78</p>
-              <p className="text-gray-500 mb-6">Ciutat Vella, 08003 Barcelona</p>
-              <div className="flex flex-col gap-2 text-sm text-gray-600 mb-6">
-                <a href="tel:+34685710000" className="hover:text-[#b89b6e] transition-colors">+34 685 710 000</a>
-                <a href="tel:+34932310745" className="hover:text-[#b89b6e] transition-colors">+34 932 310 745</a>
-              </div>
-              <a
-                href="https://www.google.com/maps?q=C/+de+Trafalgar,+78+Ciutat+Vella+08003+Barcelona"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block border border-[#b89b6e] text-[#b89b6e] hover:bg-[#b89b6e] hover:text-white font-semibold uppercase tracking-widest text-xs px-8 py-3 transition-colors duration-300"
-              >
-                Ver en Google Maps
-              </a>
-            </div>
-            <div className="flex-1 w-full h-72 rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.4!2d2.179471!3d41.390742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDIzJzI2LjciTiAywrAxMCc0Ni4xIkU!5e0!3m2!1ses!2ses!4v1"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="VEME Beauty location"
+              ))}
+            </dl>
+            <Link href="/sobre-nosotros" className="btn btn-outline mt-12">
+              Conoce el centro
+            </Link>
+          </Reveal>
+          <Reveal delay={150} className="relative">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
+              <Image
+                src={CATEGORY_IMAGES.clinica}
+                alt="Recepción del centro VEME Beauty en Barcelona"
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover object-[65%_center]"
               />
             </div>
-          </div>
-        </section>
-      </main>
+            <div className="absolute -bottom-10 -left-6 hidden w-56 overflow-hidden rounded-sm shadow-2xl ring-8 ring-cream md:block">
+              <Image
+                src="/images/imagen_2024-08-08_134248810-1024x682.png"
+                alt="Detalle del centro VEME Beauty"
+                width={1024}
+                height={682}
+                sizes="224px"
+                className="h-auto w-full"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-      <Footer />
+      {/* Categorías */}
+      <section aria-labelledby="categorias" className="bg-white py-24 md:py-32">
+        <div className="container-luxe">
+          <Reveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="eyebrow">Nuestros servicios</p>
+              <h2 id="categorias" className="mt-6 font-display text-4xl md:text-6xl">
+                Un tratamiento para cada momento
+              </h2>
+            </div>
+            <Link href="/tratamientos" className="btn btn-outline">
+              Ver los {TREATMENTS.length} tratamientos
+            </Link>
+          </Reveal>
+
+          <ul className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {HOME_CATEGORIES.map((c, i) => (
+              <Reveal as="li" key={c.title} delay={(i % 3) * 120}>
+                <Link
+                  href={c.href}
+                  className="group relative block aspect-[4/5] overflow-hidden rounded-sm bg-ink text-white sm:aspect-[3/4]"
+                >
+                  {c.image && (
+                    <Image
+                      src={c.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover object-[68%_center] opacity-85 transition-transform duration-[1.6s] ease-[var(--ease-luxe)] group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-8">
+                    <h3 className="font-display text-4xl">{c.title}</h3>
+                    <p className="mt-3 max-w-xs text-sm font-light text-white/80">{c.text}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.22em] text-gold-light">
+                      Explorar
+                      <span className="transition-transform duration-500 group-hover:translate-x-1" aria-hidden>
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <BrandStrip />
+
+      {/* Destacados */}
+      <section aria-labelledby="destacados" className="bg-cream py-24 md:py-32">
+        <div className="container-luxe">
+          <Reveal className="max-w-2xl">
+            <p className="eyebrow">Los más solicitados</p>
+            <h2 id="destacados" className="mt-6 font-display text-4xl md:text-6xl">
+              Tratamientos destacados
+            </h2>
+            <p className="mt-6 text-stone font-light">
+              Los favoritos de nuestras clientas: resultados visibles, protocolos seguros y la tecnología más avanzada.
+            </p>
+          </Reveal>
+          <ul className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURED.map((t, i) => (
+              <Reveal as="li" key={t.slug} delay={(i % 4) * 100}>
+                <TreatmentCard t={t} />
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Por qué VEME */}
+      <section aria-labelledby="porque" className="relative overflow-hidden bg-ink py-24 text-white md:py-32">
+        <div className="container-luxe grid gap-16 lg:grid-cols-[1fr_1.2fr]">
+          <Reveal>
+            <p className="eyebrow eyebrow-light">Por qué VEME</p>
+            <h2 id="porque" className="mt-6 font-display text-4xl md:text-6xl">
+              La excelencia está en <em className="text-gold-light">los detalles</em>
+            </h2>
+            <p className="mt-8 max-w-md font-light text-white/75">
+              Desde la primera consulta hasta el seguimiento, cuidamos cada paso para que te sientas en las mejores manos.
+            </p>
+          </Reveal>
+          <ol className="grid gap-px overflow-hidden rounded-sm bg-white/10 sm:grid-cols-2">
+            {PILLARS.map((p, i) => (
+              <Reveal as="li" key={p.title} delay={i * 100} className="bg-ink p-8 md:p-10">
+                <span className="font-display text-5xl text-gold/70">0{i + 1}</span>
+                <h3 className="mt-6 font-display text-2xl">{p.title}</h3>
+                <p className="mt-3 text-sm font-light leading-relaxed text-white/70">{p.text}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Reels / Instagram */}
+      <section aria-labelledby="asi-es-veme" className="bg-white py-24 md:py-32">
+        <div className="container-luxe">
+          <Reveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="eyebrow">{SITE.instagram.handle}</p>
+              <h2 id="asi-es-veme" className="mt-6 font-display text-4xl md:text-6xl">
+                Así es VEME
+              </h2>
+              <p className="mt-6 max-w-lg text-stone font-light">
+                El día a día del centro, nuestro equipo y los resultados de nuestras clientas.
+              </p>
+            </div>
+            <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+              Síguenos en Instagram
+            </a>
+          </Reveal>
+          <Reveal delay={120} className="mt-14">
+            <ReelStrip reels={REELS} />
+          </Reveal>
+        </div>
+      </section>
+
+      <BookingCTA />
+
+      {/* Ubicación */}
+      <section aria-labelledby="ubicacion" className="bg-cream py-24 md:py-32">
+        <div className="container-luxe grid gap-14 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+          <Reveal>
+            <p className="eyebrow">Encuéntranos</p>
+            <h2 id="ubicacion" className="mt-6 font-display text-4xl md:text-6xl">
+              En el corazón de Barcelona
+            </h2>
+            <address className="mt-8 not-italic text-lg font-light text-stone">
+              {fullAddress}
+              <span className="block text-base text-mist">{SITE.address.area} · Metro L1 Arc de Triomf</span>
+            </address>
+            <dl className="mt-8 space-y-3 text-sm">
+              {SITE.hours.map((h) => (
+                <div key={h.days} className="flex max-w-sm justify-between border-b border-line pb-3">
+                  <dt className="text-stone">{h.days}</dt>
+                  <dd className={h.spec ? "text-ink" : "text-mist"}>{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Cómo llegar
+              </a>
+              <a href={SITE.phones[0].href} className="btn btn-outline">
+                Llamar
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={150} className="relative aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-line">
+            <iframe
+              src={SITE.mapsEmbed}
+              title="Mapa de VEME Beauty en Barcelona"
+              className="absolute inset-0 h-full w-full grayscale-[0.6] sepia-[0.15]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }

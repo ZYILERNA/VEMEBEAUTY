@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Peeling Químicos · VEME Beauty" };
+export const metadata = treatmentMetadata("peeling-quimicos");
 
 export default function PeelingQuimicos() {
   return (
     <TreatmentPage
+      slug="peeling-quimicos"
       category="Medicina Estética"
       title="Peeling Químicos"
       subtitle="Renovación celular controlada con ácidos para transformar la piel"

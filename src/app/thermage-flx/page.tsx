@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "THERMAGE FLX · VEME Beauty" };
+export const metadata = treatmentMetadata("thermage-flx");
 
 export default function ThermageFLX() {
   return (
     <TreatmentPage
+      slug="thermage-flx"
       category="Medicina Estética · Antienvejecimiento"
       title="THERMAGE FLX"
       subtitle="Lifting sin cirugía con radiofrecuencia monopolar de última generación"
@@ -25,7 +27,6 @@ export default function ThermageFLX() {
         { label: "Zonas", value: "Rostro, ojos, cuello, cuerpo" },
         { label: "Recuperación", value: "Ninguna" },
       ]}
-      image="/images/Thermage-FLX-Tedavi-Sonrasi-Bakim-ve-Sonuclar-684x1024-1-200x300.jpg"
     />
   );
 }

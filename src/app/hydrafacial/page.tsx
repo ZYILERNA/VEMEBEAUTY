@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Hydrafacial · VEME Beauty" };
+export const metadata = treatmentMetadata("hydrafacial");
 
 export default function Hydrafacial() {
   return (
     <TreatmentPage
+      slug="hydrafacial"
       category="Estética · Dispositivos"
       title="Hydrafacial"
       subtitle="La limpieza facial más avanzada del mundo con hidratación profunda en un solo paso"
@@ -25,7 +27,6 @@ export default function Hydrafacial() {
         { label: "Recuperación", value: "Ninguna" },
         { label: "Indicaciones", value: "Poros dilatados, deshidratación, manchas, acné" },
       ]}
-      image="/images/LHP_Hydrafacial_Syndeo_Hero_Angle_03-FNL1-225x300.jpg"
     />
   );
 }

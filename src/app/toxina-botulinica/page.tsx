@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Toxina Botulínica · VEME Beauty" };
+export const metadata = treatmentMetadata("toxina-botulinica");
 
 export default function ToxinaBotulinica() {
   return (
     <TreatmentPage
+      slug="toxina-botulinica"
       category="Medicina Estética"
       title="Toxina Botulínica"
       subtitle="El tratamiento médico-estético más popular del mundo para suavizar arrugas de expresión"

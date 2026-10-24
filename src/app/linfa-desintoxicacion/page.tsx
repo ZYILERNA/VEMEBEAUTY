@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Linfa Desintoxicación · VEME Beauty" };
+export const metadata = treatmentMetadata("linfa-desintoxicacion");
 
 export default function LinfaDesintoxicacion() {
   return (
     <TreatmentPage
+      slug="linfa-desintoxicacion"
       category="Estética · Tratamientos Faciales"
       title="Linfa Desintoxicación"
       subtitle="Drenaje linfático facial para desintoxicar, desinflamar y revitalizar tu piel"

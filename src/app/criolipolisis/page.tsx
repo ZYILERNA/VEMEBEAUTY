@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Criolipólisis · VEME Beauty" };
+export const metadata = treatmentMetadata("criolipolisis");
 
 export default function Criolipolisis() {
   return (
     <TreatmentPage
+      slug="criolipolisis"
       category="Estética · Dispositivos"
       title="Criolipólisis"
       subtitle="Eliminación de grasa localizada mediante frío controlado sin cirugía"

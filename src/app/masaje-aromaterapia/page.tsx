@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Masaje Aromaterapia · VEME Beauty" };
+export const metadata = treatmentMetadata("masaje-aromaterapia");
 
 export default function MasajeAromaterapia() {
   return (
     <TreatmentPage
+      slug="masaje-aromaterapia"
       category="Estética · Tratamientos Corporales"
       title="Masaje Aromaterapia"
       subtitle="Relajación profunda del cuerpo y la mente con aceites esenciales naturales"

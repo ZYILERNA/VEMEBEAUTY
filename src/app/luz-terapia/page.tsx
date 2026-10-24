@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Luz Terapia · VEME Beauty" };
+export const metadata = treatmentMetadata("luz-terapia");
 
 export default function LuzTerapia() {
   return (
     <TreatmentPage
+      slug="luz-terapia"
       category="Medicina Estética"
       title="Luz Terapia"
       subtitle="Fototerapia LED para regenerar, calmar y rejuvenecer la piel sin agresión"

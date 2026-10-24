@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Rellenos Inductores de Colágeno · VEME Beauty" };
+export const metadata = treatmentMetadata("rellenos-inductores-de-colageno");
 
 export default function RellenosColagenoInductores() {
   return (
     <TreatmentPage
+      slug="rellenos-inductores-de-colageno"
       category="Medicina Estética"
       title="Rellenos Inductores de Colágeno"
       subtitle="Bioestimulación profunda para rejuvenecer la piel desde dentro"

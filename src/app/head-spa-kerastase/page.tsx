@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Head Spa KÉRASTASE · VEME Beauty" };
+export const metadata = treatmentMetadata("head-spa-kerastase");
 
 export default function HeadSpaKerastase() {
   return (
     <TreatmentPage
+      slug="head-spa-kerastase"
       category="Estética · Tratamientos Capilares"
       title="Head Spa KÉRASTASE"
       subtitle="La excelencia capilar francesa para transformar tu cabello y cuero cabelludo"
@@ -23,7 +25,6 @@ export default function HeadSpaKerastase() {
         { label: "Marca", value: "KÉRASTASE (L'Oréal Groupe)" },
         { label: "Recuperación", value: "Ninguna" },
       ]}
-      image="/images/kerastase-300x300.png"
     />
   );
 }
