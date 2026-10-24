@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Tratamiento SkinCeuticals · VEME Beauty" };
+export const metadata = treatmentMetadata("tratamiento-skinceutica");
 
 export default function TratamientoSkinCeutica() {
   return (
     <TreatmentPage
+      slug="tratamiento-skinceutica"
       category="Estética · Tratamientos Faciales"
       title="Tratamiento SkinCeuticals"
       subtitle="Cosmética clínica respaldada por la ciencia para resultados reales"
@@ -24,7 +26,6 @@ export default function TratamientoSkinCeutica() {
         { label: "Recuperación", value: "Ninguna o mínima" },
         { label: "Indicaciones", value: "Manchas, envejecimiento, deshidratación, firmeza" },
       ]}
-      image="/images/skin-300x300.png"
     />
   );
 }

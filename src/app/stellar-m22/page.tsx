@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Stellar M22 · VEME Beauty" };
+export const metadata = treatmentMetadata("stellar-m22");
 
 export default function StellarM22() {
   return (
     <TreatmentPage
+      slug="stellar-m22"
       category="Medicina Estética"
       title="Stellar M22"
       subtitle="La plataforma multimodal más versátil para tratamientos de luz y láser"
@@ -24,7 +26,6 @@ export default function StellarM22() {
         { label: "Recuperación", value: "Variable según modalidad (0 – 5 días)" },
         { label: "Indicaciones", value: "Manchas, rojeces, arrugas, textura, vello" },
       ]}
-      image="/images/lumenis_StellarM22_device-300x220.webp"
     />
   );
 }

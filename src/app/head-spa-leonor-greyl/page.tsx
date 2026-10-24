@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Head Spa Leonor Greyl · VEME Beauty" };
+export const metadata = treatmentMetadata("head-spa-leonor-greyl");
 
 export default function HeadSpaLeonorGreyl() {
   return (
     <TreatmentPage
+      slug="head-spa-leonor-greyl"
       category="Estética · Tratamientos Capilares"
       title="Head Spa Leonor Greyl"
       subtitle="El ritual capilar más exclusivo de París para cabellos exigentes"
@@ -23,7 +25,6 @@ export default function HeadSpaLeonorGreyl() {
         { label: "Marca", value: "Leonor Greyl (París)" },
         { label: "Recuperación", value: "Ninguna" },
       ]}
-      image="/images/leonor-300x300.png"
     />
   );
 }

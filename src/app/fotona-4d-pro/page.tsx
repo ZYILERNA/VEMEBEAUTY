@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "FOTONA 4D PRO · VEME Beauty" };
+export const metadata = treatmentMetadata("fotona-4d-pro");
 
 export default function Fotona4D() {
   return (
     <TreatmentPage
+      slug="fotona-4d-pro"
       category="Medicina Estética · Antienvejecimiento"
       title="FOTONA 4D PRO"
       subtitle="El tratamiento láser de rejuvenecimiento facial más completo del mercado"

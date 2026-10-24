@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Peeling Enzimático Corporal · VEME Beauty" };
+export const metadata = treatmentMetadata("peeling-enzimatico-corporal");
 
 export default function PeelingCorporal() {
   return (
     <TreatmentPage
+      slug="peeling-enzimatico-corporal"
       category="Estética · Tratamientos Corporales"
       title="Peeling Enzimático Corporal"
       subtitle="Renovación total de la piel del cuerpo con enzimas naturales"

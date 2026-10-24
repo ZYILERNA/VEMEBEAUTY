@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Rellenos con Ácido Hialurónico · VEME Beauty" };
+export const metadata = treatmentMetadata("rellenos-con-acido-hialuronico");
 
 export default function RellenosHialuronico() {
   return (
     <TreatmentPage
+      slug="rellenos-con-acido-hialuronico"
       category="Medicina Estética"
       title="Rellenos con Ácido Hialurónico"
       subtitle="Restauración del volumen y la hidratación con el relleno más seguro y natural"

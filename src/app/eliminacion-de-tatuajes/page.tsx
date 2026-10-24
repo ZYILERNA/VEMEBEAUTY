@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Eliminación de Tatuajes · VEME Beauty" };
+export const metadata = treatmentMetadata("eliminacion-de-tatuajes");
 
 export default function EliminacionTatuajes() {
   return (
     <TreatmentPage
+      slug="eliminacion-de-tatuajes"
       category="Tratamientos especiales"
       title="Eliminación de Tatuajes"
       subtitle='"Eliminar el tatuaje sin dejar huella. Y si la hay, la mejoramos."'
@@ -26,7 +28,8 @@ export default function EliminacionTatuajes() {
         { label: "Recuperación", value: "2 – 5 días de enrojecimiento leve" },
         { label: "Filosofía", value: "Eliminar el tatuaje sin dejar huella. Y si la hay, la mejoramos." },
       ]}
-      video="/videos/FinalTatuaje.mp4"
+      video="/videos/tatuaje-resultado.mp4"
+      videoPoster="/images/posters/tatuaje-resultado.jpg"
     />
   );
 }

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Tratamiento Valmont · VEME Beauty" };
+export const metadata = treatmentMetadata("tratamiento-valmont");
 
 export default function TratamientoValmont() {
   return (
     <TreatmentPage
+      slug="tratamiento-valmont"
       category="Estética · Tratamientos Faciales"
       title="Tratamiento Valmont"
       subtitle="Alta cosmética suiza para un rejuvenecimiento celular profundo"
@@ -24,7 +26,6 @@ export default function TratamientoValmont() {
         { label: "Recuperación", value: "Ninguna" },
         { label: "Indicaciones", value: "Envejecimiento, deshidratación, pérdida de firmeza" },
       ]}
-      image="/images/valmont-300x300.png"
     />
   );
 }

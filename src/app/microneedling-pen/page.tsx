@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Microneedling Pen · VEME Beauty" };
+export const metadata = treatmentMetadata("microneedling-pen");
 
 export default function MicroneedlingPen() {
   return (
     <TreatmentPage
+      slug="microneedling-pen"
       category="Estética · Tratamientos Faciales"
       title="Microneedling Pen"
       subtitle="Bioestimulación cutánea para rejuvenecer, reparar y transformar la piel"

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Aquapure · VEME Beauty" };
+export const metadata = treatmentMetadata("aquapure");
 
 export default function Aquapure() {
   return (
     <TreatmentPage
+      slug="aquapure"
       category="Estética · Dispositivos"
       title="Aquapure"
       subtitle="4 tecnologías en un solo dispositivo para una piel completamente renovada"
@@ -24,7 +26,6 @@ export default function Aquapure() {
         { label: "Recuperación", value: "Ninguna" },
         { label: "Indicaciones", value: "Poros dilatados, flacidez, deshidratación, envejecimiento" },
       ]}
-      image="/images/AQUAPURE-BY-CLASSYS-1-105x300.png"
     />
   );
 }

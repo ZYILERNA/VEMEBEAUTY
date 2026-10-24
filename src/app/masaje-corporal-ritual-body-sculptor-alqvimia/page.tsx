@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Masaje Body Sculptor Alqvimia · VEME Beauty" };
+export const metadata = treatmentMetadata("masaje-corporal-ritual-body-sculptor-alqvimia");
 
 export default function MasajeAlqvimia() {
   return (
     <TreatmentPage
+      slug="masaje-corporal-ritual-body-sculptor-alqvimia"
       category="Estética · Tratamientos Corporales"
       title="Masaje Body Sculptor Alqvimia"
       subtitle="Ritual corporal reafirmante y modelador con la exclusiva fórmula Alqvimia"

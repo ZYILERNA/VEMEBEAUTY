@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "MORPHEUS8 · VEME Beauty" };
+export const metadata = treatmentMetadata("morpheus8");
 
 export default function Morpheus8() {
   return (
     <TreatmentPage
+      slug="morpheus8"
       category="Medicina Estética · Antienvejecimiento"
       title="MORPHEUS8"
       subtitle="Microagujas con radiofrecuencia fraccionada para remodelación profunda de la piel"

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "PICOCARE · VEME Beauty" };
+export const metadata = treatmentMetadata("picocare");
 
 export default function Picocare() {
   return (
     <TreatmentPage
+      slug="picocare"
       category="Medicina Estética"
       title="PICOCARE"
       subtitle="El láser picosegundo más avanzado para pigmentaciones, rejuvenecimiento y eliminación de tatuajes"
@@ -25,8 +27,8 @@ export default function Picocare() {
         { label: "Indicaciones", value: "Manchas, melasma, tatuajes, rejuvenecimiento" },
         { label: "Recuperación", value: "Mínima, 1 – 3 días" },
       ]}
-      video="/videos/PicoSegundo.mp4"
-      image="/images/Diseno-sin-titulo-300x300.png"
+      video="/videos/reel-pico.mp4"
+      videoPoster="/images/posters/reel-pico.jpg"
     />
   );
 }

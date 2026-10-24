@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VEME Beauty · web
 
-## Getting Started
+Web del centro de estética y medicina estética VEME Beauty (Barcelona), hecha con Next.js 16 y Tailwind CSS 4.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3001
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Variable de entorno recomendada en producción (para el SEO: canónicas, sitemap y datos estructurados):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+En Vercel, si no se define, se usa automáticamente el dominio de producción del proyecto.
 
-## Learn More
+## Dónde se cambia cada cosa
 
-To learn more about Next.js, take a look at the following resources:
+| Qué | Archivo |
+| --- | --- |
+| Teléfonos, dirección, horario, Instagram, enlace de reservas, valoración | `src/lib/site.ts` |
+| Catálogo de tratamientos (nombre, categoría, resumen, destacados, equipo, marca) | `src/lib/treatments.ts` |
+| Imágenes y vídeos generados con Higgsfield | `src/lib/media.ts` |
+| Clips del vídeo de portada y su orden | `src/app/components/HeroSection.tsx` (`SEQUENCE`) |
+| Contenido de cada tratamiento | `src/app/<tratamiento>/page.tsx` |
+| Colores y tipografías | `src/app/globals.css` (`@theme`) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Para añadir un tratamiento: crea `src/app/<slug>/page.tsx` (copiando uno existente) y añádelo a `src/lib/treatments.ts`. El menú, la página de tratamientos, los relacionados y el sitemap se actualizan solos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Imágenes y vídeos de Higgsfield
 
-## Deploy on Vercel
+Las imágenes de cabecera de los tratamientos y los clips de la portada se generaron con Higgsfield y se sirven desde su CDN. Para alojarlos en la propia web:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+node scripts/download-media.mjs
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Descarga todo a `public/media/` y actualiza `src/lib/media.ts` para usar esas copias locales.
+
+## URLs antiguas
+
+Las URLs con erratas redirigen de forma permanente (301) a las nuevas (ver `next.config.ts`):
+`/eliminscion-de-tatuajes`, `/sobre-nostros`, `/microneedlin-pen`, `/ultraformer-lll`.

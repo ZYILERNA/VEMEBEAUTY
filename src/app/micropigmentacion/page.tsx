@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Micropigmentación · VEME Beauty" };
+export const metadata = treatmentMetadata("micropigmentacion");
 
 export default function Micropigmentacion() {
   return (
     <TreatmentPage
+      slug="micropigmentacion"
       category="Estética · Maquillaje Permanente"
       title="Micropigmentación"
       subtitle="Maquillaje semipermanente para cejas, labios y ojos con resultados naturales"

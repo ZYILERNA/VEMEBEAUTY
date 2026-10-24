@@ -1,139 +1,134 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { HERO_CLIPS } from "@/lib/media";
+import { SITE } from "@/lib/site";
 
-const SCROLL_DISTANCE = 2000; // px para recorrer el video completo
+/** Orden de los clips de la portada (claves de HERO_CLIPS en lib/media.ts) */
+const SEQUENCE = ["sala", "facial", "headspa", "terraza"] as const;
+const CROSSFADE = 1.4; // segundos de fundido entre clips
 
 export default function HeroSection() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const clips = SEQUENCE.map((k) => HERO_CLIPS[k]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const [motion, setMotion] = useState(false);
 
+  // Sólo reproducimos vídeo si el usuario no pide menos movimiento ni ahorro de datos
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.pause();
-
-    // Target progress actualizado en cada scroll (barato)
-    let targetProgress = 0;
-    // Progress "suavizado" que sigue al target con lerp
-    let currentProgress = 0;
-    let rafId: number;
-    let lastSeekTime = -1;
-
-    const fastSeek = (t: number) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const v = video as any;
-      if (typeof v.fastSeek === "function") {
-        v.fastSeek(t);
-      } else {
-        video.currentTime = t;
-      }
-    };
-
-    // Loop de animación independiente del scroll
-    const loop = () => {
-      rafId = requestAnimationFrame(loop);
-
-      // Lerp: acerca currentProgress a targetProgress
-      const diff = targetProgress - currentProgress;
-      if (Math.abs(diff) > 0.0001) {
-        currentProgress += diff * 0.12; // 0.12 = velocidad de suavizado
-      } else {
-        currentProgress = targetProgress;
-      }
-
-      // Sólo hace seek si la diferencia es visible (≥1 frame a 30fps)
-      if (video.duration && isFinite(video.duration)) {
-        const targetTime = currentProgress * video.duration;
-        if (Math.abs(targetTime - lastSeekTime) > 1 / 30) {
-          fastSeek(targetTime);
-          lastSeekTime = targetTime;
-        }
-      }
-
-      // Overlay
-      if (overlayRef.current) {
-        overlayRef.current.style.opacity = String(
-          Math.max(0.05, 0.55 - currentProgress * 0.5)
-        );
-      }
-
-      // Texto
-      if (textRef.current) {
-        const t = Math.min(currentProgress * 3, 1);
-        textRef.current.style.opacity = String(1 - t);
-        textRef.current.style.transform = `translateY(${-t * 50}px)`;
-      }
-    };
-
-    // Scroll: sólo actualiza el target (sin DOM pesado)
-    const onScroll = () => {
-      const wrapper = wrapperRef.current;
-      if (!wrapper) return;
-      const scrolled = Math.max(0, -wrapper.getBoundingClientRect().top);
-      targetProgress = Math.min(scrolled / SCROLL_DISTANCE, 1);
-    };
-
-    rafId = requestAnimationFrame(loop);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", onScroll);
-    };
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const saveData = (navigator as any).connection?.saveData === true;
+    setMotion(!reduce && !saveData);
   }, []);
 
+  useEffect(() => {
+    if (!motion) return;
+    const current = videoRefs.current[active];
+    const nextIndex = (active + 1) % clips.length;
+    const next = videoRefs.current[nextIndex];
+    if (!current) return;
+
+    current.play().catch(() => {});
+    if (next) next.preload = "auto";
+
+    let advanced = false;
+    const onTime = () => {
+      if (advanced || !current.duration) return;
+      if (current.currentTime >= current.duration - CROSSFADE) {
+        advanced = true;
+        if (next) {
+          next.currentTime = 0;
+          next.play().catch(() => {});
+        }
+        setActive(nextIndex);
+      }
+    };
+    current.addEventListener("timeupdate", onTime);
+    return () => current.removeEventListener("timeupdate", onTime);
+  }, [active, motion, clips.length]);
+
   return (
-    <div
-      ref={wrapperRef}
-      style={{ height: `calc(100vh + ${SCROLL_DISTANCE}px)` }}
-    >
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/videos/miriamhero_scrub.mp4"
-          muted
-          playsInline
-          preload="auto"
-        />
+    <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-ink text-white">
+      {/* Fondo: imagen fija siempre presente (carga instantánea) + vídeos encima */}
+      <div className="absolute inset-0 animate-slow-zoom">
+        <Image src={clips[0].poster} alt="" fill priority sizes="100vw" className="object-cover" />
+        {motion &&
+          clips.map((c, i) => (
+            <video
+              key={c.video}
+              ref={(el) => {
+                videoRefs.current[i] = el;
+              }}
+              className="absolute inset-0 h-full w-full object-cover transition-opacity ease-in-out"
+              style={{ opacity: i === active ? 1 : 0, transitionDuration: `${CROSSFADE * 1000}ms` }}
+              src={c.video}
+              muted
+              playsInline
+              preload={i === 0 ? "auto" : "none"}
+              aria-hidden
+            />
+          ))}
+      </div>
 
-        <div
-          ref={overlayRef}
-          className="absolute inset-0 bg-black"
-          style={{ opacity: 0.55 }}
-        />
+      {/* Velos para legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-black/10" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
 
-        <div
-          ref={textRef}
-          className="relative z-10 text-center text-white px-4"
-        >
-          <p className="text-sm uppercase tracking-[0.3em] text-[#d4b896] mb-4 font-light">
-            Inicio
-          </p>
-          <h1
-            className="text-5xl md:text-7xl font-bold tracking-wide mb-4"
-            style={{ fontFamily: "Georgia, serif" }}
-          >
-            VEME BEAUTY
-          </h1>
-          <p className="text-lg md:text-xl font-light text-gray-200 mb-10 tracking-wide">
-            Tu centro de estética en Barcelona
-          </p>
-          <a
-            href="https://widget.treatwell.es/establecimiento/veme-beauty"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#b89b6e] hover:bg-[#a08558] text-white font-semibold uppercase tracking-widest text-sm px-10 py-4 transition-colors duration-300"
-          >
-            Reserva
-          </a>
+      <div className="relative z-10 flex h-full items-center">
+        <div className="container-luxe">
+          <div className="max-w-2xl">
+            <p className="eyebrow eyebrow-light animate-fade-up">Estética &amp; medicina estética · Barcelona</p>
+            <h1
+              className="mt-7 font-display text-[3.2rem] leading-[0.98] sm:text-7xl lg:text-[5.6rem] animate-fade-up"
+              style={{ animationDelay: "120ms" }}
+            >
+              El arte de cuidar
+              <span className="block italic text-gold-light">tu belleza</span>
+            </h1>
+            <p
+              className="mt-7 max-w-lg text-base sm:text-lg font-light text-white/85 animate-fade-up"
+              style={{ animationDelay: "240ms" }}
+            >
+              Más de 40 tratamientos faciales, corporales, capilares y de medicina estética con las firmas y
+              tecnologías más avanzadas, junto al Arc de Triomf.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "360ms" }}>
+              <a href={SITE.bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-gold">
+                Reservar cita
+              </a>
+              <a href="/tratamientos" className="btn btn-outline-light">
+                Ver tratamientos
+              </a>
+            </div>
+            <a
+              href={SITE.reviews.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-12 inline-flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors animate-fade-up"
+              style={{ animationDelay: "480ms" }}
+            >
+              <span className="flex text-gold-light" aria-hidden>
+                {"★★★★★"}
+              </span>
+              <span>
+                <strong className="font-medium text-white">{SITE.reviews.rating.toLocaleString("es-ES")}</strong> ·{" "}
+                {SITE.reviews.count} reseñas en {SITE.reviews.source}
+              </span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+
+      <a
+        href="#descubre"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-3 text-[0.65rem] uppercase tracking-[0.3em] text-white/70 hover:text-white"
+        aria-label="Bajar al contenido"
+      >
+        Descubre
+        <span className="block h-10 w-px bg-white/60 animate-scroll-cue" />
+      </a>
+    </section>
   );
 }

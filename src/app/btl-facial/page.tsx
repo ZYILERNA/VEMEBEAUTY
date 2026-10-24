@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "BTL Facial · VEME Beauty" };
+export const metadata = treatmentMetadata("btl-facial");
 
 export default function BTLFacial() {
   return (
     <TreatmentPage
+      slug="btl-facial"
       category="Medicina Estética · Antienvejecimiento"
       title="BTL Facial"
       subtitle="Rejuvenecimiento facial no invasivo con tecnología BTL"

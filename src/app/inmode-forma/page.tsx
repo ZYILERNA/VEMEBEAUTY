@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "INMODE Forma · VEME Beauty" };
+export const metadata = treatmentMetadata("inmode-forma");
 
 export default function InmodeForma() {
   return (
     <TreatmentPage
+      slug="inmode-forma"
       category="Medicina Estética · Antienvejecimiento · INMODE"
       title="INMODE Forma"
       subtitle="Radiofrecuencia continua para lifting y reafirmación facial sin dolor"

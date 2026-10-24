@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Ondas Electromagnéticas · VEME Beauty" };
+export const metadata = treatmentMetadata("ondas-electromagneticas");
 
 export default function OndasElectromagneticas() {
   return (
     <TreatmentPage
+      slug="ondas-electromagneticas"
       category="Estética · Dispositivos"
       title="Ondas Electromagnéticas"
       subtitle="Tonificación muscular intensa y reducción de grasa con tecnología electromagnética"

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Hydrafacial Head · VEME Beauty" };
+export const metadata = treatmentMetadata("hydrafacial-head");
 
 export default function HydrafacialHead() {
   return (
     <TreatmentPage
+      slug="hydrafacial-head"
       category="Estética · Tratamientos Capilares"
       title="Hydrafacial Head"
       subtitle="La limpieza capilar más avanzada para un cuero cabelludo sano y un cabello espectacular"

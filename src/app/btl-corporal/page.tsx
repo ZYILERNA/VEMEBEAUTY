@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "BTL Corporal · VEME Beauty" };
+export const metadata = treatmentMetadata("btl-corporal");
 
 export default function BTLCorporal() {
   return (
     <TreatmentPage
+      slug="btl-corporal"
       category="Medicina Estética · Antienvejecimiento"
       title="BTL Corporal"
       subtitle="Tres tecnologías avanzadas para esculpir el cuerpo sin cirugía"

@@ -1,10 +1,12 @@
 import TreatmentPage from "../components/TreatmentPage";
+import { treatmentMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Head Spa Aveda · VEME Beauty" };
+export const metadata = treatmentMetadata("head-spa-aveda");
 
 export default function HeadSpaAveda() {
   return (
     <TreatmentPage
+      slug="head-spa-aveda"
       category="Estética · Tratamientos Capilares"
       title="Head Spa Aveda"
       subtitle="Ritual capilar holístico con los productos botánicos más puros de Aveda"
@@ -23,7 +25,6 @@ export default function HeadSpaAveda() {
         { label: "Marca", value: "Aveda" },
         { label: "Recuperación", value: "Ninguna" },
       ]}
-      image="/images/aveda-300x300.png"
     />
   );
 }
