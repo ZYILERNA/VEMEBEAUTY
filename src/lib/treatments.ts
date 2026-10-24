@@ -1,4 +1,4 @@
-import { TREATMENT_IMAGES, CATEGORY_IMAGES } from "./media";
+import { TREATMENT_IMAGES, TREATMENT_VIDEOS, CATEGORY_IMAGES } from "./media";
 
 export type GroupKey =
   | "facial"
@@ -94,9 +94,10 @@ const T: Treatment[] = [
   { slug: "eliminacion-de-tatuajes", name: "Eliminación de Tatuajes", group: "tatuajes", summary: "Protocolo combinado con láser picosegundo y Fotona para borrar tatuajes sin dejar huella.", featured: true },
 ];
 
-export const TREATMENTS: (Treatment & { image?: string })[] = T.map((t) => ({
+export const TREATMENTS: (Treatment & { image?: string; ambient?: string })[] = T.map((t) => ({
   ...t,
   image: TREATMENT_IMAGES[t.slug],
+  ambient: TREATMENT_VIDEOS[t.slug],
 }));
 
 export function getTreatment(slug: string) {

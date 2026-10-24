@@ -4,6 +4,7 @@ import Reveal from "./Reveal";
 import TreatmentCard from "./TreatmentCard";
 import BookingCTA from "./BookingCTA";
 import JsonLd from "./JsonLd";
+import AmbientVideo from "./AmbientVideo";
 import { getGroup, getTreatment, relatedTreatments } from "@/lib/treatments";
 import { SITE } from "@/lib/site";
 
@@ -88,6 +89,9 @@ export default function TreatmentPage({
             sizes="100vw"
             className="-z-10 object-cover object-[70%_center] animate-slow-zoom"
           />
+        )}
+        {t?.ambient && (
+          <AmbientVideo src={t.ambient} className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center]" />
         )}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/45 to-black/5" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
